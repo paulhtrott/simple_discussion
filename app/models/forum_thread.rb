@@ -2,7 +2,8 @@ class ForumThread < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  belongs_to :forum_category, class_name: 'Category', foreign_key: :forum_category_id
+  belongs_to :forum_category
+  belongs_to :category
   belongs_to :user
   has_many :forum_posts
   has_many :forum_subscriptions
@@ -13,6 +14,7 @@ class ForumThread < ApplicationRecord
   accepts_nested_attributes_for :forum_posts
 
   #validates :forum_category, presence: true
+  validates :category, presence: true
   validates :user_id, :title, presence: true
   validates_associated :forum_posts
 
