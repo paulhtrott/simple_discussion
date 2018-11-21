@@ -2,7 +2,7 @@ class ForumThread < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  belongs_to :forum_category
+  #belongs_to :forum_category
   belongs_to :category
   belongs_to :user
   has_many :forum_posts
