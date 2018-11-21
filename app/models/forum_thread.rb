@@ -64,7 +64,7 @@ class ForumThread < ApplicationRecord
       if subscription.subscription_type == "optout"
         "You're ignoring this thread."
       elsif subscription.subscription_type == "optin"
-        "You're receiving notifications because you've subscribed to this thread."
+        "You are following this topic and will be notified when there are new posts."
       end
     elsif forum_posts.where(user_id: user.id).any?
       "You're receiving notifications because you've posted in this thread."
