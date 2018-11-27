@@ -11,6 +11,8 @@ class ForumThread < ApplicationRecord
   has_many :optout_subscribers, ->{ where(forum_subscriptions: { subscription_type: :optout }) }, through: :forum_subscriptions, source: :user
   has_many :users, through: :forum_posts
 
+  has_many :likes, as: :likeable
+
   accepts_nested_attributes_for :forum_posts
 
   #validates :forum_category, presence: true
