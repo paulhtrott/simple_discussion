@@ -22,7 +22,7 @@ class ForumThread < ApplicationRecord
 
   scope :pinned_first, ->{ order(pinned: :desc) }
   scope :solved,       ->{ where(solved: true) }
-  scope :sorted,       ->{ order(updated_at: :desc) }
+  scope :sorted,       ->{ joins(:forum_posts).group('forum_threads.id').order('MAX(forum_posts.id) DESC') }
   scope :unpinned,     ->{ where.not(pinned: true) }
   scope :unsolved,     ->{ where.not(solved: true) }
 
