@@ -60,13 +60,13 @@ class ForumThread < ApplicationRecord
   end
 
   def subscribed_reason(user)
-    return "You’re not receiving notifications from this thread." if user.nil?
+    return "Follow this topic to be notified when there are new posts." if user.nil?
 
     subscription = subscription_for(user)
 
     if subscription.present?
       if subscription.subscription_type == "optout"
-        "You're ignoring this thread."
+        "Follow this topic to be notified when there are new posts."
       elsif subscription.subscription_type == "optin"
         "You are following this topic and will be notified when there are new posts."
       end
