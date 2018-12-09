@@ -60,20 +60,21 @@ class ForumThread < ApplicationRecord
   end
 
   def subscribed_reason(user)
-    return "Follow this topic to be notified when there are new posts." if user.nil?
+    #return "Follow this topic to be notified when there are new posts." if user.nil?
+    return I18n.t :no_user, scope: [:simple_discussion, :thread_messages] if user.nil?
 
     subscription = subscription_for(user)
 
     if subscription.present?
       if subscription.subscription_type == "optout"
-        "Follow this topic to be notified when there are new posts."
+        I18n.t :optout, scope: [:simple_discussion, :thread_messages]
       elsif subscription.subscription_type == "optin"
-        "You are following this topic and will be notified when there are new posts."
+        I18n.t :optin, scope: [:simple_discussion, :thread_messages]
       end
     elsif forum_posts.where(user_id: user.id).any?
-      "You're receiving notifications because you've posted in this thread."
+      I18n.t :notified, scope: [:simple_discussion, :thread_messages]
     else
-      "You're not receiving notifications from this thread."
+      I18n.t :not_notified, scope: [:simple_discussion, :thread_messages]
     end
   end
 
