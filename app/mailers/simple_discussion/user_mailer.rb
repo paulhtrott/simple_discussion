@@ -22,7 +22,7 @@ class SimpleDiscussion::UserMailer < ApplicationMailer
 
     mail(
       to: "#{@recipient.name} <#{@recipient.email}>",
-      subject: "New post in #{@forum_thread.title}"
+      subject: "New comment posted by #{@forum_post.user.name} to #{@forum_thread.title}"
     )
   end
 end
