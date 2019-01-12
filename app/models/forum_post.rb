@@ -13,6 +13,30 @@ class ForumPost < ApplicationRecord
 
   after_update :solve_forum_thread, if: :solved?
 
+  scope :not_open, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state != ?', 'open')
+  }
+
+  scope :open, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state = ?', 'open')
+  }
+
+  scope :not_accepted, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state != ?', 'accept')
+  }
+
+  scope :accepted, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state = ?', 'accept')
+  }
+
+  scope :not_rejected, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state != ?', 'reject')
+  }
+
+  scope :rejected, -> {
+    joins(:flagged_items).where('flagged_items.aasm_state = ?', 'reject')
+  }
+
   def solve_forum_thread
     forum_thread.update(solved: true)
   end
