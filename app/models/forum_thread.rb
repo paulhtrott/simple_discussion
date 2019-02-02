@@ -2,6 +2,8 @@ class ForumThread < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  has_paper_trail
+
   #belongs_to :forum_category
   belongs_to :category
   belongs_to :user

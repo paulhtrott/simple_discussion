@@ -1,4 +1,6 @@
 class ForumPost < ApplicationRecord
+  has_paper_trail
+
   belongs_to :forum_thread, counter_cache: true, touch: true
   belongs_to :user
   #has_many :reactions, as: :reactable # not sure this is used anywhere, seems to break ability to soft delete
