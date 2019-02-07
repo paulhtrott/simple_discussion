@@ -91,4 +91,8 @@ class ForumThread < ApplicationRecord
   def notify_users
     []
   end
+
+  def name
+    "Forum (#{title})"
+  end
 end
