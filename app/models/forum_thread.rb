@@ -28,6 +28,10 @@ class ForumThread < ApplicationRecord
   scope :unpinned,     ->{ where.not(pinned: true) }
   scope :unsolved,     ->{ where.not(solved: true) }
 
+  def parent
+    self
+  end
+
   def subscribed_users
     (users + optin_subscribers).uniq - optout_subscribers
   end

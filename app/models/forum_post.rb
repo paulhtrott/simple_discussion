@@ -42,4 +42,8 @@ class ForumPost < ApplicationRecord
   def solve_forum_thread
     forum_thread.update(solved: true)
   end
+
+  def parent
+    forum_thread
+  end
 end
