@@ -16,27 +16,27 @@ class ForumPost < ApplicationRecord
   after_update :solve_forum_thread, if: :solved?
 
   scope :not_open, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'open')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'pending')
   }
 
   scope :open, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'open')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'pending')
   }
 
   scope :not_accepted, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'accept')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'remove')
   }
 
   scope :accepted, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'accept')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'remove')
   }
 
   scope :not_rejected, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'reject')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'keep')
   }
 
   scope :rejected, -> {
-    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'reject')
+    left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state = ?', 'keep')
   }
 
   def solve_forum_thread
