@@ -7,7 +7,7 @@ class ForumPost < ApplicationRecord
 
   has_many :flagged_items, as: :flaggable
 
-  has_many :replies, as: :commentable, class: 'Comment'
+  has_many :replies, as: :commentable, class_name: 'Comment'
 
   has_many :likes, as: :likeable
 
