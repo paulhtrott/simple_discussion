@@ -11,6 +11,8 @@ class ForumPost < ApplicationRecord
 
   has_many :likes, as: :likeable
 
+  belongs_to :last_changed_by, class_name: 'User', optional: true
+
   validates :user_id, :body, presence: true
 
   scope :sorted, ->{ order(:created_at) }
