@@ -21,7 +21,7 @@ class SimpleDiscussion::UserMailer < ApplicationMailer
     @recipient    = recipient
 
     mail(
-      to: "#{@recipient.name} <#{@recipient.email}>",
+      to: @recipient.email,
       subject: 'New comment posted'
     )
   end
