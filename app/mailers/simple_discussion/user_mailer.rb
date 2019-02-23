@@ -22,7 +22,7 @@ class SimpleDiscussion::UserMailer < ApplicationMailer
 
     mail(
       to: @recipient.email,
-      subject: 'New comment posted'
+      subject: @forum_post.is_a?(ForumPost) ? 'New comment posted' : 'New reply posted'
     )
   end
 end
