@@ -1,12 +1,15 @@
-<div style="position: relative">
-  <%= gravatar_image_tag @forum_post.user.email, style: "float: left" %>
+<h1>New comment posted</h1>
 
-  <div style="margin-left:60px">
-    <p><strong><%= @forum_post.user.name %></strong> <small>commented:</small></p>
-    <%= formatted_content @forum_post.body %>
-  </div>
-</div>
+<p><%= @forum_post.user.name %> posted a comment to <%= @forum_thread.title %>:</p>
 
-<br />
 
-<p><%= link_to "Reply to this comment", forum_thread_url(@forum_post.forum_thread, anchor: "forum_post_#{@forum_post.id}"), style: "background:#be2126; color:#fff; text-decoration:none; padding: 10px 20px" %></p>
+<p>Comment:</p>
+<p>
+  <%= formatted_content @forum_post.body %>
+</p>
+
+<p>
+  <%= link_to 'VIEW DISCUSSION', simple_discussion.forum_thread_path(@forum_thread) %>
+</p>
+
+<p>This message was sent to <%= @recipient.email %>. If you don't want to receive these emails from Pelacore in the future, please <%= link_to 'unsubscribe', simple_discussion.forum_thread_path(@forum_thread) %>.</p>
