@@ -4,6 +4,7 @@ class ForumThread < ApplicationRecord
 
   has_paper_trail
 
+
   #belongs_to :forum_category
   belongs_to :category
   belongs_to :user
@@ -97,5 +98,9 @@ class ForumThread < ApplicationRecord
 
   def name
     "Forum (#{title})"
+  end
+
+  def body
+    forum_posts.first.try(:body)
   end
 end
