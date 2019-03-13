@@ -101,6 +101,6 @@ class ForumThread < ApplicationRecord
   end
 
   def body
-    title
+    forum_posts.first.body
   end
 end
