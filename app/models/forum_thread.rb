@@ -97,7 +97,7 @@ class ForumThread < ApplicationRecord
   end
 
   def name
-    "Forum (#{title})"
+    "Forum Thread (#{title})"
   end
 
   def body
