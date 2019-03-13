@@ -101,6 +101,6 @@ class ForumThread < ApplicationRecord
   end
 
   def body
-    forum_posts.first.try(:body)
+    title
   end
 end
