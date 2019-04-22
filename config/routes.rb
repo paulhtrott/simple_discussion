@@ -6,6 +6,7 @@ SimpleDiscussion::Engine.routes.draw do
         get :unanswered
         get :mine
         get :participating
+        get :following
         get "category/:id", to: "forum_categories#index", as: :forum_category
       end
 
