@@ -16,7 +16,7 @@ class ForumPost < ApplicationRecord
 
   after_update :solve_forum_thread, if: :solved?
 
-  enum posting_as: [:user, :instructor]
+  enum posting_as: [:user, :instructor, :annonymous]
 
   scope :not_open, -> {
     left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'pending')

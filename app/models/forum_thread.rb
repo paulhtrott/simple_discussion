@@ -17,7 +17,7 @@ class ForumThread < ApplicationRecord
   has_many :flagged_items, as: :flaggable
   has_many :likes, as: :likeable
 
-  enum posting_as: [:user, :instructor]
+  enum posting_as: [:user, :instructor, :annonymous]
 
   accepts_nested_attributes_for :forum_posts
 
