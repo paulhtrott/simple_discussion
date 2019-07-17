@@ -31,6 +31,7 @@ class ForumThread < ApplicationRecord
   scope :sorted,       ->{ order(updated_at: :desc) }
   scope :unpinned,     ->{ where.not(pinned: true) }
   scope :unsolved,     ->{ where.not(solved: true) }
+  scope :not_flagged,  ->{ where.not(id: FlaggedItem.where(flaggable_type: 'ForumThread', aasm_state: 'keep').pluck(:flaggable_id)) }
 
   def parent
     self
