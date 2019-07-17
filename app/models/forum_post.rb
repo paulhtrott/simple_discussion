@@ -6,11 +6,8 @@ class ForumPost < ApplicationRecord
   #has_many :reactions, as: :reactable # not sure this is used anywhere, seems to break ability to soft delete
 
   has_many :flagged_items, as: :flaggable
-
   has_many :replies, as: :commentable, class_name: 'Comment'
-
   has_many :likes, as: :likeable
-
   belongs_to :last_changed_by, class_name: 'User', optional: true
 
   validates :user_id, :body, presence: true
@@ -18,6 +15,8 @@ class ForumPost < ApplicationRecord
   scope :sorted, ->{ order(:created_at) }
 
   after_update :solve_forum_thread, if: :solved?
+
+  enum posting_as: [:user, :instructor, :annonymous]
 
   scope :not_open, -> {
     left_outer_joins(:flagged_items).where('flagged_items IS NULL OR flagged_items.aasm_state != ?', 'pending')
